@@ -14,6 +14,12 @@
     - [Challenge 2: Well Of Ideas](#challenge-2-well-of-ideas)
     - [Challenge 3: React Manage Events](#challenge-3-react-manage-events)
     - [Challenge 4: React Santa Wish List](#challenge-4-react-santa-wish-list)
+- [Week 3](#week-3)
+    - [Challenge 1: Is Palindrome?](#challenge-1-build-search-filter-in-react)
+    - [Challenge 2: Well Of Ideas](#challenge-2-fetch-random-user-data)
+    - [Challenge 3: React Manage Events](#challenge-3-react-router-blog)
+    - [Challenge 4: React Santa Wish List](#challenge-4-redux-lecture)
+
 
 ---
 # Week 1
@@ -161,3 +167,171 @@ class WishlistForm extends React.Component {
 };
 
 ```
+# Week 3
+> [Week 3 challenges](./challenges/src/challenges/Week3)
+## Challenge 1 Build Search Filter In React
+
+Code:
+``` Javascript
+import React, { useState } from "react";
+
+const tempArray = [
+  "Banana",
+  "Apple",
+  "Orange",
+  "Mango",
+  "Pineapple",
+  "Watermelon",
+];
+
+export const Challenge1 = () => {
+  const [search, setSearch] = useState(tempArray);
+
+  const searchArray =(e)=>{
+    if(!e.target.value) {setSearch(tempArray); return;}
+    setSearch(tempArray.filter(t=>t.toLowerCase().includes(e.target.value.toLowerCase())));
+  }
+
+  return (
+    <div style={{border: '2px solid black'}}>
+          <h2>Challenge #1</h2>
+      <input onChange={searchArray} />
+      <ul>
+      {
+          search.map(e=>( <li key={e}>{e}</li> ))
+      }
+      </ul>
+    </div>
+  );
+};
+```
+## Challenge 2 Fetch Random User Data 
+
+Code:
+``` Javascript
+import React, { useState } from "react";
+import { useEffect } from "react";
+
+export const Challenge2 = () => {
+  const [obj, setObj] = useState({
+    id: 1,
+    name: "Leanne Graham",
+    username: "Bret",
+    email: "Sincere@april.biz",
+    address: {
+      street: "Kulas Light",
+      suite: "Apt. 556",
+      city: "Gwenborough",
+      zipcode: "92998-3874",
+      geo: {
+        lat: "-37.3159",
+        lng: "81.1496",
+      },
+    },
+    phone: "1-770-736-8031 x56442",
+    website: "hildegard.org",
+    company: {
+      name: "Romaguera-Crona",
+      catchPhrase: "Multi-layered client-server neural-net",
+      bs: "harness real-time e-markets",
+    },
+  });
+
+  useEffect(() => {
+    updateUser();
+  }, [])
+  
+
+  const updateUser = () => {
+    fetch(
+      `https://jsonplaceholder.typicode.com/users/${
+        Math.floor(Math.random() * (10 - 1) + 1)
+      }`
+    )
+      .then((response) => response.json())
+      .then((json) => setObj(json));
+  };
+
+  return (
+    <div style={{ border: "2px solid black" }}>
+      <h2>Challenge #2</h2>
+      <h3>User Data</h3>
+      <button onClick={updateUser}>Reset</button>
+      <p>
+        <strong>Name:</strong>
+        {obj.name}
+      </p>
+      <p>
+        <strong>Website:</strong>
+        {obj.website}
+      </p>
+      <p>
+        <strong>Email:</strong>
+        {obj.email}
+      </p>
+      <p>
+        <strong>Phone:</strong>
+        {obj.phone}
+      </p>
+    </div>
+  );
+};
+
+```
+## Challenge 3 React Router Blog 
+
+Code:
+``` Javascript
+import {Route,Routes, Navigate, Link} from 'react-router-dom';
+
+
+export const Challenge3 = () => {
+ 
+
+  return (
+    <div style={{border: '2px solid black'}}>
+      <h2>Challenge #3</h2>
+
+      <Routes>
+        <Route path="/" element={(
+          <>
+          <ul>
+            <li>
+              <h3><Link to='/react' >React</Link> </h3>
+            </li>
+            <li>
+              <h3><Link to='/corecode' >Core Code</Link> </h3>
+            </li>
+            <li>
+              <h3><Link to='/helloworld' >Hello world</Link> </h3>
+            </li>
+          </ul>
+            
+          </>
+        )} />
+        <Route path="/react" element={(
+          <>
+            React
+            <h4><Link to='/'>👈Back</Link> </h4>
+          </>
+        )} />
+        <Route path="/corecode" element={(
+          <>
+            corecode
+            <h4><Link to='/'>👈Back</Link> </h4>
+          </>
+        )} />
+        <Route path="/helloworld" element={(
+          <>
+            helloworld
+            <h4><Link to='/'>👈Back</Link> </h4>
+          </>
+        )} />
+        <Route path="*" element={<Navigate to='/'/>} />
+      </Routes>
+    </div>
+  );
+};
+```
+## Challenge 4 Redux lecture
+[Redux lecture Link](https://dev.to/thesanjeevsharma/just-redux-the-complete-guide-44d5)
