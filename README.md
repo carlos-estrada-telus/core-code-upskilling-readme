@@ -16,9 +16,14 @@
     - [Challenge 4: React Santa Wish List](#challenge-4-react-santa-wish-list)
 - [Week 3](#week-3)
     - [Challenge 1: Is Palindrome?](#challenge-1-build-search-filter-in-react)
-    - [Challenge 2: Well Of Ideas](#challenge-2-fetch-random-user-data)
-    - [Challenge 3: React Manage Events](#challenge-3-react-router-blog)
-    - [Challenge 4: React Santa Wish List](#challenge-4-redux-lecture)
+    - [Challenge 2: Fetch random user](#challenge-2-fetch-random-user-data)
+    - [Challenge 3: React router blog](#challenge-3-react-router-blog)
+    - [Challenge 4: Redux lecture](#challenge-4-redux-lecture)
+- [Week 4](#week-4)
+    - [Challenge 1: Two to one](#challenge-1-two-to-one)
+    - [Challenge 2: Leap year](#challenge-2-leap-years)
+    - [Challenge 3: Maximum length difference](#challenge-3-maximum-length-difference)
+    - [Challenge 4: Base64 numeric translator](#challenge-4-base64-numeric-translator)
 
 
 ---
@@ -335,3 +340,52 @@ export const Challenge3 = () => {
 ```
 ## Challenge 4 Redux lecture
 [Redux lecture Link](https://dev.to/thesanjeevsharma/just-redux-the-complete-guide-44d5)
+
+# Week 4
+> [Week 3 challenges](./challenges/src/challenges/Week3)
+## Challenge 1 Two To One
+
+Code:
+``` Javascript
+function longest(s1, s2) {
+  return [...new Set((s1+s2).split(''))].sort().join('')
+}
+```
+## Challenge 2 Leap Years
+
+Code:
+``` Javascript
+function isLeapYear(year) {
+  return year%100===0&&year%400!==0?false:year%400===0 || year%4===0?true:false
+}
+```
+
+## Challenge 3 Maximum Length Difference
+
+Code:
+``` Javascript
+function mxdiflg(a1, a2) {
+  let maxDiff= -1;
+  
+  a1.forEach(x=>{
+    a2.forEach(y=>{
+      let x1=x.length;
+      let y1= y.length;
+      let temp=Math.abs(x1-y1)
+      if(temp>maxDiff) maxDiff=temp;
+    })
+  })
+  
+  return maxDiff;
+  
+}
+```
+## Challenge 4 Base64 Numeric Translator
+
+Code:
+``` Javascript
+function base64toBase10(base64) {
+  const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  return base64.split('').reduce((p, c) => p * 64 + base.indexOf(c), 0);
+}
+```
