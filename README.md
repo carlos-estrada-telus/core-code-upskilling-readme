@@ -24,6 +24,11 @@
     - [Challenge 2: Leap year](#challenge-2-leap-years)
     - [Challenge 3: Maximum length difference](#challenge-3-maximum-length-difference)
     - [Challenge 4: Base64 numeric translator](#challenge-4-base64-numeric-translator)
+- [Week 5](#week-5)
+    - [Challenge 1: Fun With Lists](#challenge-1-fun-with-lists)
+    - [Challenge 2: Separating Strings](#challenge-2-separating-strings)
+    - [Challenge 3: Highest Scoring Word](#challenge-3-highest-scoring-word)
+    - [Challenge 4: Where Is My Parent?](#challenge-4-where-is-my-parent)
 
 
 ---
@@ -387,5 +392,72 @@ Code:
 function base64toBase10(base64) {
   const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
   return base64.split('').reduce((p, c) => p * 64 + base.indexOf(c), 0);
+}
+```
+
+# Week 5
+
+## Challenge 1 Fun With Lists
+
+Code:
+``` Javascript
+function map(head, f) {
+  return !head?null: new Node(f(head.data),map(head.next,f));
+}
+```
+
+## Challenge 2 Separating Strings
+
+Code:
+``` Javascript
+function sepStr(str) {
+  const words=str.split(' ');
+  let maxSize= 0
+  
+  words.forEach(w=>{
+    if(w.length>maxSize) maxSize=w.length;
+  })
+  
+  let output=[]
+  for(i=0;i<maxSize;i++){
+    for(j=0;j<words.length;j++){
+      if(output[i]){
+        output[i].push(words[j][i]?words[j][i]:'')
+        
+      }else{
+        output[i]=[words[0][i]?words[0][i]:'']
+      }
+    }
+  }
+  
+  return output
+}
+```
+
+## Challenge 3 Highest Scoring Word
+
+Code:
+``` Javascript
+function high(x){
+  return x.split(' ').map(w =>
+    ({ word: w, value: w.split('').reduce((prev, current) => prev + current.charCodeAt() - 96, 0) }))
+    .sort((a, b) => b.value - a.value)[0].word
+}
+```
+
+## Challenge 4 Where Is My Parent?
+
+Code:
+``` Javascript
+function findChildren(dancingBrigade) {
+  return dancingBrigade.split('').sort().filter(p => p === p.toLocaleUpperCase()).map(p => {
+    let output = p
+    dancingBrigade.split('').forEach(c => {
+      if (c === c.toLocaleLowerCase() && c.toLocaleUpperCase() === p) {
+        output += c;
+      }
+    })
+    return output;
+  }).join('')
 }
 ```
