@@ -29,7 +29,11 @@
     - [Challenge 2: Separating Strings](#challenge-2-separating-strings)
     - [Challenge 3: Highest Scoring Word](#challenge-3-highest-scoring-word)
     - [Challenge 4: Where Is My Parent?](#challenge-4-where-is-my-parent)
-
+- [Week 6](#week-6)
+    - [Challenge 1: Expressions Matter](#challenge-1-expressions-matter)
+    - [Challenge 2: Sudoku Solution Validator](#challenge-2-sudoku-solution-validator)
+    - [Challenge 3: Even Or Odd](#challenge-3-even-or-odd)
+    - [Challenge 4: Returning Strings](#challenge-4-returning-strings)
 
 ---
 # Week 1
@@ -460,4 +464,54 @@ function findChildren(dancingBrigade) {
     return output;
   }).join('')
 }
+```
+# Week 6
+
+## Challenge 1 Expressions Matter
+
+Code:
+``` SQL
+SELECT GREATEST( A+B+C, (A+B)*C, A*(B+C), A*B*C ) AS res FROM expression_matter;
+```
+
+## Challenge 2 Sudoku Solution Validator
+
+Code:
+``` Javascript
+function validSolution(board){
+  const checkRows =(input) =>!(input.map(arr=>arr.filter((item, index) => arr.indexOf(item) != index).length).some(v=>v!==0));
+  const transformArray = (arr)=>{
+    let res = [];
+    for (let i = 0; i < 9; i += 3) {
+      for (let j = 0; j < 9; j += 3) {
+        let curr = [];
+        for (let k = 0; k < 3; k++) {
+          for (let l = 0; l < 3; l++) {
+            curr.push(arr[i + k][j + l]);
+          }
+        }
+        res.push(curr);
+      }
+    }
+    return res;
+  }
+  const rowCheck=checkRows(board)
+  const columnCheck=checkRows(board[0].map((_, colIndex) => board.map(row => row[colIndex])));
+  const blocksCheck=checkRows(transformArray(board))
+    
+    return rowCheck && columnCheck && blocksCheck
+}
+```
+## Challenge 3 Even Or Odd
+
+Code:
+``` SQL
+select CASE when mod(number,2)=0 then 'Even' else 'Odd' END as is_even from numbers;
+```
+
+## Challenge 4 Returning Strings
+
+Code:
+``` SQL
+select 'Hello, '||name||' how are you doing today?' as greeting from person;
 ```
