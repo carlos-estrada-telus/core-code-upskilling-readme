@@ -34,6 +34,11 @@
     - [Challenge 2: Sudoku Solution Validator](#challenge-2-sudoku-solution-validator)
     - [Challenge 3: Even Or Odd](#challenge-3-even-or-odd)
     - [Challenge 4: Returning Strings](#challenge-4-returning-strings)
+- [Week 7](#week-7)
+    - [Challenge 1: SQL Basics: Simple NULL Handling](#challenge-1-sql-basics-simple-null-handling)
+    - [Challenge 2: The takeWhile Function](#challenge-2-the-takewhile-function)
+    - [Challenge 3: The Supermarket Queue](#challenge-3-the-supermarket-queue)
+    - [Challenge 4: Sum Of Digits / Digital Root](#challenge-4-sum-of-digits--digital-root)
 
 ---
 # Week 1
@@ -514,4 +519,52 @@ select CASE when mod(number,2)=0 then 'Even' else 'Odd' END as is_even from numb
 Code:
 ``` SQL
 select 'Hello, '||name||' how are you doing today?' as greeting from person;
+```
+
+# Week 7
+
+## Challenge 1 SQL Basics: Simple NULL Handling
+
+Code:
+``` SQL
+select 
+  id, 
+  COALESCE(NULLIF(name,''),'[product name not found]') as name,
+  COALESCE(price,0) as price, 
+  COALESCE(NULLIF(card_name,''),'[card name not found]') as card_name, 
+  card_number,
+  transaction_date 
+from eusales
+where price>50; 
+```
+## Challenge 2 The takeWhile Function
+
+Code:
+``` Javascript
+function takeWhile (arr, pred) {
+  let i= arr.findIndex(v=>!pred(v))
+  return i===-1?arr:arr.slice(0, i)
+}
+```
+## Challenge 3 The Supermarket Queue
+
+Code:
+``` Javascript
+function queueTime(customers, n) {
+  var lines = new Array(n).fill(0);
+  for (let t of customers) {
+    const lowest = lines.indexOf(Math.min(...lines));
+    lines[lowest] += t;
+    
+  }
+  return Math.max(...lines);
+}
+```
+## Challenge 4 Sum Of Digits / Digital Root
+
+Code:
+``` Javascript
+function digitalRoot(n) {
+  return n<10?n:digitalRoot(`${n}`.split('').reduce((prev,curr)=>Number(prev)+Number(curr),0))
+}
 ```
